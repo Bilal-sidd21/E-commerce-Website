@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Luxe | Premium Modern E-Commerce Store</title>
+  <meta name="description" content="Discover premium audio, luxury watches, modern accessories, and smart tech at Aura Luxe. Seamless shopping experience with fast delivery.">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav-wrapper">
+      <!-- Logo -->
+      <a href="#" class="logo" id="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+        <div class="logo-text">Siddiqui <span>Luxe</span></div>
+      </a>
+
+      <!-- Real-time Live Search Bar -->
+      <div class="search-container">
+        <div class="search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="global-search" class="search-input" placeholder="Search products, brands, or categories..." autocomplete="off">
+        </div>
+        <div id="search-dropdown" class="search-results-dropdown"></div>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Theme Switcher -->
+        <button id="theme-toggle" class="action-btn" title="Toggle Dark/Light Mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <!-- Wishlist Drawer Trigger -->
+        <button id="wishlist-trigger" class="action-btn" title="View Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span id="wishlist-count" class="badge-count">0</span>
+        </button>
+
+        <!-- Shopping Cart Drawer Trigger -->
+        <button id="cart-trigger" class="action-btn" title="View Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span id="cart-count" class="badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main>
+    <!-- HERO BANNER SECTION -->
+    <section class="hero container">
+      <div class="hero-banner">
+        <div class="hero-content">
+          <span class="hero-tag"><i class="fa-solid fa-sparkles"></i> Exclusive Autumn Collection</span>
+          <h1 class="hero-title">Experience Tomorrow's Technology Today.</h1>
+          <p class="hero-subtitle">Elevate your everyday lifestyle with our hand-curated collection of premium acoustics, luxury timepieces, and modern fashion items.</p>
+          <a href="#catalog-section" class="hero-cta">
+            Shop Collection <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="hero-graphic">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="Featured Aura Pro Headphones" class="hero-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOG & FILTER SECTION -->
+    <section id="catalog-section" class="catalog-section container">
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <!-- Category Pills Navigation -->
+        <div class="category-pills" id="category-pills">
+          <button class="category-pill active" data-category="all"><i class="fa-solid fa-border-all"></i> All Products</button>
+          <button class="category-pill" data-category="electronics"><i class="fa-solid fa-laptop"></i> Electronics</button>
+          <button class="category-pill" data-category="watches"><i class="fa-solid fa-clock"></i> Luxury Watches</button>
+          <button class="category-pill" data-category="fashion"><i class="fa-solid fa-shirt"></i> Fashion</button>
+          <button class="category-pill" data-category="accessories"><i class="fa-solid fa-glasses"></i> Accessories</button>
+          <button class="category-pill" data-category="home"><i class="fa-solid fa-house"></i> Home Tech</button>
+        </div>
+
+        <!-- Secondary Toolbar: Price Range & Sorting -->
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <div class="price-filter-wrap">
+              <label for="price-range">Max Price: <strong id="price-val">$600</strong></label>
+              <input type="range" id="price-range" class="price-slider" min="0" max="700" step="10" value="700">
+            </div>
+          </div>
+
+          <div class="toolbar-right">
+            <span class="results-count" id="results-count">Showing 12 Products</span>
+            <select id="sort-select" class="sort-select">
+              <option value="popular">Sort by: Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="products-grid">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== SHOPPING CART DRAWER ==================== -->
+  <div class="drawer" id="cart-drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title"><i class="fa-solid fa-bag-shopping"></i> Shopping Cart</h3>
+      <button class="close-btn" id="close-cart-btn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="drawer-body" id="cart-body">
+      <!-- Cart items injected here -->
+    </div>
+    <div class="drawer-footer">
+      <div class="coupon-box">
+        <input type="text" id="coupon-code" class="coupon-input" placeholder="Promo code (e.g. AURA20)">
+        <button id="apply-coupon-btn" class="coupon-btn">Apply</button>
+      </div>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">$0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Discount</span>
+        <span id="cart-discount">-$0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Estimated Tax (5%)</span>
+        <span id="cart-tax">$0.00</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span id="cart-total">$0.00</span>
+      </div>
+      <button id="proceed-checkout-btn" class="checkout-btn">Proceed to Checkout <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- ==================== WISHLIST DRAWER ==================== -->
+  <div class="drawer" id="wishlist-drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title"><i class="fa-solid fa-heart" style="color:#ef4444;"></i> Saved Items</h3>
+      <button class="close-btn" id="close-wishlist-btn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="drawer-body" id="wishlist-body">
+      <!-- Saved Wishlist items injected here -->
+    </div>
+  </div>
+
+  <!-- ==================== QUICK VIEW MODAL ==================== -->
+  <div class="modal-overlay" id="quickview-overlay">
+    <div class="quickview-modal">
+      <button class="close-btn quickview-close" id="close-quickview-btn"><i class="fa-solid fa-xmark"></i></button>
+      <img id="qv-img" class="quickview-img" src="" alt="Product Image">
+      <div class="quickview-content">
+        <span id="qv-category" class="product-category">Category</span>
+        <h2 id="qv-title">Product Name</h2>
+        <div class="product-rating" id="qv-rating">
+        </div>
+        <p id="qv-desc" style="color: var(--text-secondary); font-size: 0.95rem;">Product Description...</p>
+        <div class="specs-list" id="qv-specs">
+          <!-- Spec tags -->
+        </div>
+        <div style="margin-top: auto;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <span id="qv-price" style="font-size: 1.8rem; font-weight: 800; color: var(--text-primary);">$0.00</span>
+            <span id="qv-stock" style="color: var(--success); font-weight: 600; font-size: 0.9rem;"><i class="fa-solid fa-circle-check"></i> In Stock</span>
+          </div>
+          <button id="qv-add-cart-btn" class="checkout-btn"><i class="fa-solid fa-cart-plus"></i> Add to Shopping Bag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="checkout-overlay">
+    <div class="checkout-modal-content">
+      <button class="close-btn" id="close-checkout-btn" style="position: absolute; top: 1.5rem; right: 1.5rem;"><i class="fa-solid fa-xmark"></i></button>
+      
+      <!-- Checkout Step Indicators -->
+      <div class="checkout-steps">
+        <div class="step-item active" id="step-1-indicator">
+          <div class="step-num">1</div>
+          <span class="step-label">Shipping</span>
+        </div>
+        <div class="step-item" id="step-2-indicator">
+          <div class="step-num">2</div>
+          <span class="step-label">Payment</span>
+        </div>
+        <div class="step-item" id="step-3-indicator">
+          <div class="step-num">3</div>
+          <span class="step-label">Review</span>
+        </div>
+      </div>
+
+      <!-- Step 1: Shipping Form -->
+      <form id="checkout-form">
+        <div id="step-1-content">
+          <h3 style="margin-bottom: 1.25rem;">Shipping Address</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="first-name">First Name *</label>
+              <input type="text" id="first-name" class="form-control" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name *</label>
+              <input type="text" id="last-name" class="form-control" placeholder="Doe" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" class="form-control" placeholder="john.doe@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Street Address *</label>
+            <input type="text" id="address" class="form-control" placeholder="123 Luxury Ave, Suite 400" required>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="city">City *</label>
+              <input type="text" id="city" class="form-control" placeholder="New York" required>
+            </div>
+            <div class="form-group">
+              <label for="zip">Postal Code *</label>
+              <input type="text" id="zip" class="form-control" placeholder="10001" required>
+            </div>
+          </div>
+          <button type="button" id="next-to-payment-btn" class="checkout-btn" style="margin-top: 1rem;">Continue to Payment <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- Step 2: Payment Details -->
+        <div id="step-2-content" style="display: none;">
+          <h3 style="margin-bottom: 1.25rem;">Select Payment Method</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+            <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 1rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer;">
+              <input type="radio" name="payment" value="card" checked>
+              <i class="fa-regular fa-credit-card" style="font-size: 1.2rem; color: var(--accent-primary);"></i>
+              <span style="font-weight: 600;">Credit / Debit Card</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 1rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer;">
+              <input type="radio" name="payment" value="cod">
+              <i class="fa-solid fa-truck-ramp-box" style="font-size: 1.2rem; color: var(--success);"></i>
+              <span style="font-weight: 600;">Cash on Delivery (COD)</span>
+            </label>
+          </div>
+
+          <div id="card-fields">
+            <div class="form-group">
+              <label for="card-num">Card Number</label>
+              <input type="text" id="card-num" class="form-control" placeholder="4532 •••• •••• 8892">
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="card-exp">Expiry (MM/YY)</label>
+                <input type="text" id="card-exp" class="form-control" placeholder="12/28">
+              </div>
+              <div class="form-group">
+                <label for="card-cvv">CVV</label>
+                <input type="password" id="card-cvv" class="form-control" placeholder="•••">
+              </div>
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button type="button" id="back-to-shipping-btn" class="coupon-btn" style="padding: 0.9rem 1.5rem;">Back</button>
+            <button type="button" id="next-to-review-btn" class="checkout-btn">Review Order <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Step 3: Order Review & Confirmation -->
+        <div id="step-3-content" style="display: none;">
+          <h3 style="margin-bottom: 1.25rem;">Final Order Summary</h3>
+          <div id="checkout-order-summary" style="background: var(--bg-input); padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; font-size: 0.92rem;">
+            <!-- Render summary list -->
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <button type="button" id="back-to-payment-btn" class="coupon-btn" style="padding: 0.9rem 1.5rem;">Back</button>
+            <button type="submit" id="place-order-btn" class="checkout-btn"><i class="fa-solid fa-lock"></i> Place Order Now</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== ORDER SUCCESS & INVOICE MODAL ==================== -->
+  <div class="modal-overlay" id="order-success-overlay">
+    <div class="checkout-modal-content" style="text-align: center; max-width: 600px;">
+      <div style="width: 70px; height: 70px; background: rgba(16, 185, 129, 0.15); color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 1.5rem;">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h2>Order Placed Successfully!</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Thank you for shopping with Aura Luxe. Your order confirmation has been emailed to you.</p>
+      
+      <!-- Printable Invoice Container -->
+      <div id="printable-invoice" style="text-align: left; background: var(--bg-input); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; font-size: 0.88rem;">
+        <!-- Injected order summary details -->
+      </div>
+
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button id="print-invoice-btn" class="coupon-btn" style="padding: 0.8rem 1.5rem;"><i class="fa-solid fa-print"></i> Print Invoice</button>
+        <button id="finish-order-btn" class="checkout-btn" style="width: auto; padding: 0.8rem 2rem;">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATIONS CONTAINER ==================== -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div class="logo-text">Aura <span>Luxe</span></div>
+          </a>
+          <p>Your premier destination for high-performance audio, premium watches, and luxury lifestyle tech accessories.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="filter-link" data-cat="electronics">Electronics</a></li>
+            <li><a href="#" class="filter-link" data-cat="watches">Luxury Watches</a></li>
+            <li><a href="#" class="filter-link" data-cat="fashion">Fashion & Apparel</a></li>
+            <li><a href="#" class="filter-link" data-cat="accessories">Tech Accessories</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="#">Order Tracking</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">Warranty Guide</a></li>
+            <li><a href="#">FAQs & Help</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Stay Connected</h4>
+          <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1rem;">Subscribe to receive exclusive deals and new release alerts.</p>
+          <form id="newsletter-form" style="display: flex; gap: 0.5rem;">
+            <input type="email" placeholder="Your email address" required style="flex: 1; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-primary); outline: none;">
+            <button type="submit" class="coupon-btn"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Siddiqui Luxe Store. All rights reserved.</p>
+        <div style="display: flex; gap: 1rem; font-size: 1.4rem; color: var(--text-muted);">
+          <i class="fa-brands fa-cc-visa"></i>
+          <i class="fa-brands fa-cc-mastercard"></i>
+          <i class="fa-brands fa-cc-apple-pay"></i>
+          <i class="fa-brands fa-cc-paypal"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Scripts -->
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
